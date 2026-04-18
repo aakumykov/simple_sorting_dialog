@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Песочница Kotlin</string>
+    <string name="show_dialog">Показать диалог</string>
+    <string name="sorting_cancelled">Изменение сортировки отменено</string>
+</resources>
