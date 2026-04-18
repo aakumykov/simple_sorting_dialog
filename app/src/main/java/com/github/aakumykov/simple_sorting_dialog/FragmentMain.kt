@@ -32,8 +32,9 @@ class FragmentMain :
     override fun onResume() {
         super.onResume()
         SimpleSortingDialog
-            .find(parentFragmentManager)
+            .find<SimpleSortingMode>(parentFragmentManager)
             ?.setCallbacks(this)
+            ?.setTranslator(translator)
     }
 
     override fun onDestroyView() {
@@ -56,10 +57,23 @@ class FragmentMain :
         binding.logView.text = text
     }
 
+    private val translator: SimpleSortingDialog.Translator<SimpleSortingMode> by lazy {
+        object: SimpleSortingDialog.Translator<SimpleSortingMode> {
+            override fun externalMode2simpleSortingMode(externalMode: SimpleSortingMode): SimpleSortingMode {
+                return externalMode
+            }
+
+            override fun simpleSortingMode2externalMode(simpleSortingMode: SimpleSortingMode): SimpleSortingMode {
+                return simpleSortingMode
+            }
+        }
+    }
+
     private fun showDialog() {
         SimpleSortingDialog
-            .createAndShow(parentFragmentManager, currentSettings)
+            .createAndShow<SimpleSortingMode>(parentFragmentManager, currentSettings)
             .setCallbacks(this)
+            .setTranslator(translator)
     }
 
     companion object {
