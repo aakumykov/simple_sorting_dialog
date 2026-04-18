@@ -12,7 +12,7 @@ import com.google.gson.Gson
 
 class FragmentMain :
     Fragment(R.layout.fragment_main),
-    SortingDialog.Callbacks
+    SimpleSortingDialog.Callbacks
 {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -31,7 +31,7 @@ class FragmentMain :
 
     override fun onResume() {
         super.onResume()
-        SortingDialog
+        SimpleSortingDialog
             .find(parentFragmentManager)
             ?.setCallbacks(this)
     }
@@ -48,7 +48,7 @@ class FragmentMain :
         storeStringInPreferences(SORTING_SETTINGS, sortingSettings.toJSON(Gson()))
     }
 
-    override fun onCancelled() {
+    override fun onSortingCancelled() {
         showToast(R.string.sorting_cancelled)
     }
 
@@ -57,7 +57,7 @@ class FragmentMain :
     }
 
     private fun showDialog() {
-        SortingDialog
+        SimpleSortingDialog
             .createAndShow(parentFragmentManager, currentSettings)
             .setCallbacks(this)
     }
