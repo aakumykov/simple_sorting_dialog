@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Песочница Kotlin</string>
-    <string name="show_dialog">Показать диалог</string>
-    <string name="sorting_cancelled">Изменение сортировки отменено</string>
+    <string name="app_name">Kotlin playground</string>
+    <string name="show_dialog">Show sorting dialog</string>
+    <string name="sorting_cancelled">Sorting cancelled</string>
 </resources>
