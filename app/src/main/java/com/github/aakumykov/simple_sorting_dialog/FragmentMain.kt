@@ -5,10 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.github.aakumykov.simple_sorting_dialog.databinding.FragmentMainBinding
-import com.github.aakumykov.simple_sorting_dialog.extensions.getStringFromPreferences
 import com.github.aakumykov.simple_sorting_dialog.extensions.showToast
-import com.github.aakumykov.simple_sorting_dialog.extensions.storeStringInPreferences
-import com.google.gson.Gson
 
 class FragmentMain :
     Fragment(R.layout.fragment_main),
@@ -16,12 +13,6 @@ class FragmentMain :
 {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
-    private val currentSettings: SortingSettings? get() {
-        return getStringFromPreferences(SORTING_SETTINGS)?.let {
-            SortingSettings.fromJSON(it, Gson())
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +36,6 @@ class FragmentMain :
         Log.d(TAG, sortingSettings.toString())
         showToast(sortingSettings.toHumanString())
         showInfo(sortingSettings.toHumanString())
-        storeStringInPreferences(SORTING_SETTINGS, sortingSettings.toJSON(Gson()))
     }
 
     override fun onSortingCancelled() {
@@ -58,7 +48,7 @@ class FragmentMain :
 
     private fun showDialog() {
         SimpleSortingDialog
-            .createAndShow(parentFragmentManager, currentSettings)
+            .createAndShow(parentFragmentManager)
             .setCallbacks(this)
     }
 
